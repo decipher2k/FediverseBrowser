@@ -3,7 +3,7 @@
 Fediverse Hub is a production-oriented .NET scaffold for a cross-platform Fediverse timeline app. It runs in demo mode without real accounts and keeps UI, domain logic, API adapters, persistence, localization and platform shells separated.
 
 # Caveat
-Accounts are created in the format <accountname>.peer
+Accounts are created in the format -accountname-.peer
 
 ## Architecture
 
