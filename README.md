@@ -1,6 +1,7 @@
 # Fediverse Hub
 
-Fediverse Hub is a production-oriented .NET scaffold for a cross-platform Fediverse timeline app. It runs in demo mode without real accounts and keeps UI, domain logic, API adapters, persistence, localization and platform shells separated.
+Fediverse Hub is a production-oriented .NET scaffold for a cross-platform Fediverse timeline app. All sources (Mastodon, Lemmy etc.) are shown in a single timeline.
+There is endless scrolling, but no doom scrolling due to the lag of addicting algorithms.
 
 # Caveat
 Accounts are created in the format -accountname-.peer
