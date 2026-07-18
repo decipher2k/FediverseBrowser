@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FediverseHub.Maui.OnboardingPage"
+             Title="{Binding Title}">
+    <Grid Padding="16" RowDefinitions="Auto,Auto,*,Auto" RowSpacing="12">
+        <Label Grid.Row="0" Text="{Binding Title}" FontSize="24" FontAttributes="Bold" />
+        <Label Grid.Row="1" Text="{Binding Subtitle}" />
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Interests}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="4"
+                            Padding="10"
+                            Stroke="{AppThemeBinding Light=#D1D5DB, Dark=#374151}"
+                            StrokeShape="RoundRectangle 8">
+                        <VerticalStackLayout Spacing="6">
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                            <Label Text="{Binding DisplayName}" FontAttributes="Bold" />
+                            <Label Text="{Binding HashtagPreview}" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <VerticalStackLayout Grid.Row="3" Spacing="8">
+            <Entry Placeholder="{Binding CustomHashtagsLabel}" Text="{Binding CustomHashtags, Mode=TwoWay}" />
+            <Label Text="{Binding ValidationMessage}" TextColor="{AppThemeBinding Light=#9B1C1C, Dark=#FCA5A5}" />
+            <Button Text="{Binding CompleteLabel}" Clicked="OnCompleteClicked" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

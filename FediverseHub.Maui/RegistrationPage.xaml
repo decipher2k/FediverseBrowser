@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FediverseHub.Maui.RegistrationPage"
+             Title="{Binding Title}">
+    <Grid Padding="20" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto" RowSpacing="12">
+        <Label Grid.Row="0"
+               Text="{Binding Title}"
+               FontSize="26"
+               FontAttributes="Bold" />
+
+        <Label Grid.Row="1"
+               Text="{Binding Explanation}"
+               LineBreakMode="WordWrap" />
+
+        <Entry Grid.Row="2"
+               Placeholder="{Binding AccountNameLabel}"
+               Text="{Binding AccountName}" />
+
+        <Entry Grid.Row="3"
+               Placeholder="{Binding EmailLabel}"
+               Keyboard="Email"
+               Text="{Binding Email}" />
+
+        <Entry Grid.Row="4"
+               Placeholder="{Binding PasswordLabel}"
+               IsPassword="True"
+               Text="{Binding Password}" />
+
+        <Entry Grid.Row="5"
+               Placeholder="{Binding ConfirmPasswordLabel}"
+               IsPassword="True"
+               Text="{Binding ConfirmPassword}" />
+
+        <VerticalStackLayout Grid.Row="6" Spacing="4">
+            <Label Text="{Binding PeerAccountNameLabel}" FontAttributes="Bold" />
+            <Label Text="{Binding PeerAccountName}" />
+            <Label Text="{Binding Message}"
+                   TextColor="{AppThemeBinding Light=#9B1C1C, Dark=#FCA5A5}" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="7"
+                        ItemsSource="{Binding Results}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,8"
+                            Padding="10"
+                            Stroke="{AppThemeBinding Light=#D1D5DB, Dark=#374151}"
+                            StrokeShape="RoundRectangle 8">
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="{Binding Provider}" FontAttributes="Bold" />
+                            <Label Text="{Binding AccountHandle}" />
+                            <Label Text="{Binding State}" FontSize="12" />
+                            <Label Text="{Binding Message}" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid Grid.Row="8" ColumnDefinitions="*,*" ColumnSpacing="10">
+            <Button Grid.Column="0"
+                    Text="{Binding BackLabel}"
+                    Clicked="OnBackClicked" />
+            <VerticalStackLayout Grid.Column="1" Spacing="8">
+                <Button Text="{Binding RegisterLabel}"
+                        Command="{Binding RegisterCommand}" />
+                <Button Text="{Binding ContinueLabel}"
+                        IsVisible="{Binding CanContinue}"
+                        Clicked="OnContinueClicked" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

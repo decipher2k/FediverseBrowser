@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FediverseHub.Maui.MainPage"
+             Title="{Binding AllTabTitle}">
+
+    <Grid Padding="16" RowDefinitions="Auto,Auto,*" RowSpacing="12">
+        <Grid.GestureRecognizers>
+            <SwipeGestureRecognizer Direction="Left" Swiped="OnSwipeLeft" />
+            <SwipeGestureRecognizer Direction="Right" Swiped="OnSwipeRight" />
+        </Grid.GestureRecognizers>
+
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+            <ScrollView Grid.Column="0" Orientation="Horizontal">
+                <HorizontalStackLayout Spacing="8">
+                    <Button Text="{Binding AllTabTitle}" Clicked="OnAllClicked" />
+                    <Button Text="{Binding MastodonTabTitle}" Clicked="OnMastodonClicked" />
+                    <Button Text="{Binding PixelfedTabTitle}" Clicked="OnPixelfedClicked" />
+                    <Button Text="{Binding PeerTubeTabTitle}" Clicked="OnPeerTubeClicked" />
+                    <Button Text="{Binding LemmyTabTitle}" Clicked="OnLemmyClicked" />
+                    <Button Text="{Binding RssTabTitle}" Clicked="OnRssClicked" />
+                </HorizontalStackLayout>
+            </ScrollView>
+            <Button Grid.Column="1"
+                    Text="{Binding RefreshLabel}"
+                    Command="{Binding RefreshCommand}" />
+        </Grid>
+
+        <Label Grid.Row="1"
+               Text="{Binding ErrorMessage}"
+               TextColor="{AppThemeBinding Light=#9B1C1C, Dark=#FCA5A5}" />
+
+        <RefreshView Grid.Row="2"
+                     Command="{Binding RefreshCommand}"
+                     IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+            <CollectionView ItemsSource="{Binding Items}"
+                            RemainingItemsThreshold="3"
+                            RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,12"
+                                Padding="14"
+                                Stroke="{AppThemeBinding Light=#D1D5DB, Dark=#374151}"
+                                StrokeShape="RoundRectangle 8"
+                                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#111827}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnPostTapped" />
+                            </Border.GestureRecognizers>
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="8">
+                                <HorizontalStackLayout Grid.Row="0" Spacing="8">
+                                    <Label Text="{Binding Source}"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#2563EB, Dark=#93C5FD}" />
+                                    <Label Text="{Binding PublishedAt}"
+                                           TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+                                </HorizontalStackLayout>
+                                <Label Grid.Row="1"
+                                       Text="{Binding Author}"
+                                       FontAttributes="Bold" />
+                                <Label Grid.Row="2"
+                                       Text="{Binding Title}"
+                                       IsVisible="{Binding HasTitle}"
+                                       FontSize="18"
+                                       FontAttributes="Bold" />
+                                <Label Grid.Row="3"
+                                       Text="{Binding Text}"
+                                       IsVisible="{Binding HasText}"
+                                       LineBreakMode="WordWrap" />
+                                <VerticalStackLayout Grid.Row="4"
+                                                     IsVisible="{Binding HasImages}"
+                                                     BindableLayout.ItemsSource="{Binding ImageUrls}"
+                                                     Spacing="8">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding .}"
+                                                   Aspect="AspectFill"
+                                                   HeightRequest="260"
+                                                   BackgroundColor="{AppThemeBinding Light=#E5E7EB, Dark=#1F2937}" />
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                                <Grid Grid.Row="5"
+                                      IsVisible="{Binding HasVideo}"
+                                      HeightRequest="320">
+                                    <Image Source="{Binding MediaPreviewUrl}"
+                                           Aspect="AspectFill"
+                                           BackgroundColor="{AppThemeBinding Light=#E5E7EB, Dark=#1F2937}" />
+                                    <Border BackgroundColor="#80000000"
+                                            StrokeShape="RoundRectangle 32"
+                                            WidthRequest="64"
+                                            HeightRequest="64"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center">
+                                        <Label Text="Play"
+                                               TextColor="White"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center" />
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.Footer>
+                    <ActivityIndicator IsRunning="{Binding IsLoadingMore}"
+                                       IsVisible="{Binding IsLoadingMore}"
+                                       Margin="0,8,0,16" />
+                </CollectionView.Footer>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

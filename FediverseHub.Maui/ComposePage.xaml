@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FediverseHub.Maui.ComposePage"
+             Title="{Binding SourceLabel}">
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+            <Label Text="{Binding SourceLabel}" FontAttributes="Bold" />
+            <Label Text="{Binding ReadOnlyNotice}" FontSize="12" />
+            <Picker x:Name="SourcePicker" SelectedIndexChanged="OnSourceChanged" />
+            <Entry Placeholder="{Binding TitleLabel}" Text="{Binding Title}" />
+            <Editor Placeholder="{Binding BodyLabel}"
+                    Text="{Binding Text}"
+                    AutoSize="TextChanges"
+                    HeightRequest="160" />
+            <Entry Placeholder="{Binding CommunityLabel}" Text="{Binding CommunityName}" />
+            <Label Text="{Binding StatusMessage}" />
+            <Button Text="{Binding PublishLabel}" Command="{Binding PublishCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

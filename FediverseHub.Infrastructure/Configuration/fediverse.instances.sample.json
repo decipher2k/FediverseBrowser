@@ -1,0 +1,44 @@
+{
+  "mastodon": {
+    "sourceType": "Mastodon",
+    "baseUrl": "https://mastodon.social",
+    "clientId": null,
+    "redirectUri": "fediversehub://oauth/mastodon",
+    "preferExternalRegistration": false
+  },
+  "pixelfed": {
+    "sourceType": "Pixelfed",
+    "baseUrl": "https://pixelfed.social",
+    "clientId": null,
+    "redirectUri": "fediversehub://oauth/pixelfed",
+    "preferExternalRegistration": false
+  },
+  "peerTube": {
+    "sourceType": "PeerTube",
+    "baseUrl": "https://video.blender.org",
+    "clientId": null,
+    "redirectUri": null,
+    "preferExternalRegistration": true
+  },
+  "lemmy": {
+    "sourceType": "Lemmy",
+    "baseUrl": "https://lemmy.world",
+    "clientId": null,
+    "redirectUri": null,
+    "preferExternalRegistration": true
+  },
+  "rssFeeds": [
+    {
+      "id": "fediverse-report",
+      "title": "Fediverse Report",
+      "url": "https://fediversereport.com/rss",
+      "isEnabled": true
+    },
+    {
+      "id": "open-source-news",
+      "title": "Open Source News",
+      "url": "https://opensource.com/feed",
+      "isEnabled": true
+    }
+  ]
+}
